@@ -20,7 +20,8 @@ namespace SalesWebAPI.Models
         public int CustomerId { get; set; } // foreign key
 
         public virtual Customer Customer { get; set; } // customer instance
-        //public virtual Orderline Orderlines { get; set; }
+        public virtual IEnumerable<Orderline> Orderlines { get; set; }
+
 
         public Order() { }
     }

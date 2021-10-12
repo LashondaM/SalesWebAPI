@@ -26,6 +26,7 @@ namespace SalesWebAPI.Controllers
         {
             return await _context.Orders
                                     .Include(x => x.Customer)
+                                    .Include(x => x.Orderlines)
                                     .ToListAsync();
         }
 
@@ -33,10 +34,12 @@ namespace SalesWebAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Order>> GetOrder(int id)
         {
-            var order = await _context.Orders
+            var order = await _context.Orders.FindAsync(id);
+
+            /*var order = await _context.Orders
                                       .Include(x => x.Customer)
                                       .Include(x => x.Orderlines)
-                                      .SingleOrDefaultAsync(x => x.Id == id);
+                                      .SingleOrDefaultAsync(x => x.Id == id); */
 
             if (order == null)
             {
